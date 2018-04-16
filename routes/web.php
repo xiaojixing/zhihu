@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+

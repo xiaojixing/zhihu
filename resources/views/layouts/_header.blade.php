@@ -29,8 +29,8 @@
                     <div>
                         <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kassandra Ankunding2  <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user/5">我的主页</a></li>
-                            <li><a href="/user/5/setting">个人设置</a></li>
+                            <li><a href="{{ route('users.show', Auth::id()) }}">我的主页</a></li>
+                            <li><a href="{{ route('users.edit', Auth::id()) }}">个人设置</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">退出
