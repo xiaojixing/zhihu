@@ -19,8 +19,8 @@
                      @foreach($posts as $post)
                         <div class="blog-post" style="margin-top: 30px">
                             <?php \Carbon\Carbon::setLocale('zh');?>
-                            <p class=""><a href="/user/{{$post->user_id}}">{{$post->user->name}}</a> {{$post->created_at->diffForHumans()}}</p>
-                            <p class=""><a href="/posts/{{$post->id}}" >{{$post->title}}</a></p>
+                            <p class=""><a href="{{ route('users.show', $post->user_id)}}">{{$post->user->name}}</a> {{$post->created_at->diffForHumans()}}</p>
+                            <p class=""><a href="{{ route('users.show', $post->user_id)}}" >{{$post->title}}</a></p>
 
 
                             <p>{!! str_limit($post->content, 100, '...') !!}</p>
