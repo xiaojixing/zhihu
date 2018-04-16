@@ -1,61 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1>
-                    <i class="glyphicon glyphicon-align-justify"></i> Post
-                    <a class="btn btn-success pull-right" href="{{ route('posts.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
-                </h1>
-            </div>
-
-            <div class="panel-body">
-                @if($posts->count())
-                    <table class="table table-condensed table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Title</th> <th>Body</th> <th>User_id</th> <th>Category_id</th> <th>Reply_count</th> <th>View_count</th> <th>Last_reply_user_id</th> <th>Order</th> <th>Excerpt</th> <th>Slug</th>
-                                <th class="text-right">OPTIONS</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach($posts as $post)
-                                <tr>
-                                    <td class="text-center"><strong>{{$post->id}}</strong></td>
-
-                                    <td>{{$post->title}}</td> <td>{{$post->body}}</td> <td>{{$post->user_id}}</td> <td>{{$post->category_id}}</td> <td>{{$post->reply_count}}</td> <td>{{$post->view_count}}</td> <td>{{$post->last_reply_user_id}}</td> <td>{{$post->order}}</td> <td>{{$post->excerpt}}</td> <td>{{$post->slug}}</td>
-                                    
-                                    <td class="text-right">
-                                        <a class="btn btn-xs btn-primary" href="{{ route('posts.show', $post->id) }}">
-                                            <i class="glyphicon glyphicon-eye-open"></i> 
-                                        </a>
-                                        
-                                        <a class="btn btn-xs btn-warning" href="{{ route('posts.edit', $post->id) }}">
-                                            <i class="glyphicon glyphicon-edit"></i> 
-                                        </a>
-
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete? Are you sure?');">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="_method" value="DELETE">
-
-                                            <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {!! $posts->render() !!}
-                @else
-                    <h3 class="text-center alert alert-info">Empty!</h3>
-                @endif
-            </div>
-        </div>
+<div class="row">
+        <div class="col-sm-8 blog-main">
+            <div>
+                    <div id="carousel-example" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example" data-slide-to="1"></li>
+                            <li data-target="#carousel-example" data-slide-to="2"></li>
+                        </ol><!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://ww1.sinaimg.cn/large/44287191gw1excbq6tb3rj21400migrz.jpg" alt="..." />
+                                <div class="carousel-caption">...</div>
+                            </div>
+                            <div class="item">
+                                <img src="http://ww3.sinaimg.cn/large/44287191gw1excbq5iwm6j21400min3o.jpg" alt="..." />
+                                <div class="carousel-caption">...</div>
+                            </div>
+                            <div class="item">
+                                <img src="http://ww2.sinaimg.cn/large/44287191gw1excbq4kx57j21400migs4.jpg" alt="..." />
+                                <div class="carousel-caption">...</div>
+                            </div>
+                        </div>
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right carousel-control" href="#carousel-example" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </div>       
+                 <div style="height: 20px;"></div>
+                <div>
+                    @include('posts._posts_list', ['posts' => $posts])
+                    <ul class="pagination">
+                        {!! $posts->render() !!}
+                    </ul>
+                </div><!-- /.blog-main -->
     </div>
-</div>
-
+    @include("layouts._sidebar")
 @endsection
+
