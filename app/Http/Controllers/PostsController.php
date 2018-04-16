@@ -36,6 +36,7 @@ class PostsController extends Controller
 	public function store(PostRequest $request, Post $post)
 	{
 		$data = $request->all();
+        $data['body '] =  clean($request->body, 'user_post_body');
         $data['user_id'] = Auth::id();
         $post->create($data);
 		return redirect()->route('posts.show', $post->id)->with('message', 'Created successfully.');
