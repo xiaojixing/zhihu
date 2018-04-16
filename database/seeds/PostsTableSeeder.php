@@ -9,7 +9,7 @@ class PostsTableSeeder extends Seeder
 {
     public function run()
     {
-        $posts = factory(Post::class)->times(50)->make()->each(function ($post, $index) {
+        $posts = factory(Post::class)->times(10)->make()->each(function ($post, $index) {
             // 所有用户 ID 数组，如：[1,2,3,4]
 	        $user_ids = User::all()->pluck('id')->toArray();
 
@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder
 	        $faker = app(Faker\Generator::class);
 
 	        $posts = factory(Post::class)
-	                        ->times(100)
+	                        ->times(10)
 	                        ->make()
 	                        ->each(function ($post, $index)
 	                            use ($user_ids, $category_ids, $faker)

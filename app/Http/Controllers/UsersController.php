@@ -18,7 +18,8 @@ class UsersController extends Controller
 
 	public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $posts = $user->posts()->get();
+        return view('users.show', compact('user', 'posts'));
     }
 
     public function edit(User $user)
