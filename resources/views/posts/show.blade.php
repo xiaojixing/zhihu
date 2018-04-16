@@ -1,62 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-sm-8 blog-main">
+        <div class="blog-post">
+            <div style="display:inline-flex">
+                    <h2 class="blog-post-title">{{ $post->title }}</h2>
+                                        <a style="margin: auto"  href="/posts/62/edit">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                                                            <a style="margin: auto"  href="/posts/62/delete">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                                </div>
 
-<div class="container">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1>Post / Show #{{ $post->id }}</h1>
-            </div>
-
-            <div class="panel-body">
-                <div class="well well-sm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a class="btn btn-link" href="{{ route('posts.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
-                        </div>
-                        <div class="col-md-6">
-                             <a class="btn btn-sm btn-warning pull-right" href="{{ route('posts.edit', $post->id) }}">
-                                <i class="glyphicon glyphicon-edit"></i> Edit
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <label>Title</label>
-<p>
-	{{ $post->title }}
-</p> <label>Body</label>
-<p>
-	{{ $post->body }}
-</p> <label>User_id</label>
-<p>
-	{{ $post->user_id }}
-</p> <label>Category_id</label>
-<p>
-	{{ $post->category_id }}
-</p> <label>Reply_count</label>
-<p>
-	{{ $post->reply_count }}
-</p> <label>View_count</label>
-<p>
-	{{ $post->view_count }}
-</p> <label>Last_reply_user_id</label>
-<p>
-	{{ $post->last_reply_user_id }}
-</p> <label>Order</label>
-<p>
-	{{ $post->order }}
-</p> <label>Excerpt</label>
-<p>
-	{{ $post->excerpt }}
-</p> <label>Slug</label>
-<p>
-	{{ $post->slug }}
-</p>
+            <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} <a href="{{ route('users.show', $post->user_id) }}">{{ $post->user->name }}</a></p>
+            <p>{{ $post->body }}</p>
+            <div>
+             <a href="/posts/62/zan" type="button" class="btn btn-primary btn-lg">赞</a>
             </div>
         </div>
-    </div>
-</div>
 
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">评论</div>
+
+            <!-- List group -->
+            <ul class="list-group">
+                                <li class="list-group-item">
+                    <h5>2017-05-28 10:15:08 by Kassandra Ankunding2</h5>
+                    <div>
+                        这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论
+                    </div>
+                </li>
+                            </ul>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">发表评论</div>
+
+            <!-- List group -->
+            <ul class="list-group">
+                <form action="/posts/comment" method="post">
+                    <input type="hidden" name="_token" value="4BfTBDF90Mjp8hdoie6QGDPJF2J5AgmpsC9ddFHD">
+                    <input type="hidden" name="post_id" value="62"/>
+                    <li class="list-group-item">
+                        <textarea name="content" class="form-control" rows="10"></textarea>
+                        <button class="btn btn-default" type="submit">提交</button>
+                    </li>
+                </form>
+
+            </ul>
+        </div>
+
+    </div><!-- /.blog-main -->
 @endsection
